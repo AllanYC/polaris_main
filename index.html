@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="icon"
+            href="https://docs.polarisadmin.xyz/assets/img/logonav.png"
+            type="image/png"
+        />
+        <title>Polaris HQ</title>
+        <meta property="og:title" content="Polaris HQ" />
+        <meta
+            property="og:description"
+            content="Ditch traditional systems, it's time to start using a fast, efficient, and gorgeous method of administration."
+        />
+        <meta
+            property="og:image"
+            content="https://i.ibb.co/JQ5R2Wf/Untitled-5.png"
+        />
+        <meta property="og:url" content="https://polarisadmin.xyz" />
+        <meta property="og:type" content="website" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <style>
+            body {
+                background: linear-gradient(135deg, #0f0f1f, #1a1a2e, #0f0f1f);
+                background-size: 300% 300%;
+                animation: gradientShift 15s ease infinite;
+                color: #ffffff;
+                scroll-behavior: smooth;
+                position: relative;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                font-family: "Montserrat", sans-serif;
+            }
+
+            @keyframes gradientShift {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            .loading-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(20px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                transition: opacity 0.5s ease;
+            }
+
+            .loading-overlay.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .loader {
+                border: 8px solid rgba(255, 255, 255, 0.2);
+                border-top: 8px solid #3a3a3a;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .background-video {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: -1;
+                filter: brightness(0.4);
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.5rem 2rem;
+                backdrop-filter: blur(20px);
+                background-color: rgba(11, 11, 11, 0.2);
+                position: relative;
+                z-index: 10;
+            }
+
+            .header a {
+                color: #a0aec0;
+                transition:
+                    color 0.2s,
+                    transform 0.2s;
+            }
+
+            .header a:hover {
+                color: #e5e7eb;
+                transform: scale(1.1);
+            }
+
+            .btn-primary {
+                border: 1px solid rgba(87, 83, 78, 0.2);
+                background-color: rgba(12, 12, 12, 0.2);
+                backdrop-filter: blur(20px);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 6px;
+                font-weight: 600;
+                transition:
+                    background-color 0.3s,
+                    transform 0.2s;
+            }
+
+            .btn-primary:hover {
+                background-color: #151515;
+                transform: translateY(-2px);
+            }
+
+            .btn-secondary {
+                border: 1px solid rgba(87, 83, 78, 0.2);
+                color: #ffffff;
+                background-color: rgba(12, 12, 12, 0.2);
+                backdrop-filter: blur(20px);
+                padding: 12px 24px;
+                border-radius: 6px;
+                font-weight: 600;
+                transition:
+                    color 0.3s,
+                    background-color 0.3s,
+                    transform 0.2s;
+            }
+
+            .btn-secondary:hover {
+                background-color: #151515;
+                transform: translateY(-2px);
+            }
+
+            .feature-container {
+                border: 1px solid rgba(87, 83, 78, 0.2);
+                max-width: 75%;
+                margin: 2rem auto;
+                padding: 2rem;
+                backdrop-filter: blur(20px);
+                background-color: rgba(11, 11, 11, 0.2);
+                border-radius: 12px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+                transition: transform 0.3s;
+            }
+
+            .feature-container:hover {
+                transform: scale(1.05);
+            }
+
+            .fade-in {
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeIn 0.5s forwards;
+            }
+
+            @keyframes fadeIn {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .stop-music-button {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+
+                border: 1px solid rgba(87, 83, 78, 0.2);
+                backdrop-filter: blur(20px);
+                background-color: rgba(11, 11, 11, 0.2);
+                border-radius: 12px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+
+                color: white;
+                padding: 10px 15px;
+                cursor: pointer;
+                transition: background-color 0.4s;
+                z-index: 20;
+            }
+
+            .stop-music-button:hover {
+                background-color: rgba(22, 22, 22, 0.4);
+            }
+
+            .logo {
+                max-height: 50px;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="loading-overlay" id="loading">
+            <div class="loader"></div>
+        </div>
+
+        <video autoplay muted loop class="background-video">
+            <source src="background.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <audio id="background-music" autoplay loop>
+            <source src="song.mp3" type="audio/mpeg" />
+            Your browser does not support the audio tag.
+        </audio>
+
+        <button class="stop-music-button" onclick="stopMusic()">MUTE</button>
+
+        <header class="header">
+            <img
+                src="https://i.ibb.co/JQ5R2Wf/Untitled-5.png"
+                alt="Polaris Logo"
+                class="logo"
+            />
+            <nav class="space-x-6">
+                <a href="https://discord.gg/polaris">Status</a>
+                <a href="https://docs.polarisadmin.xyz">Documentation</a>
+                <a href="https://discord.gg/polaris">Discord Server</a>
+            </nav>
+        </header>
+
+        <section class="pt-64 flex items-center justify-center text-center">
+            <div class="space-y-8 fade-in">
+                <h1
+                    class="text-5xl font-extrabold tracking-tight text-white leading-tight sm:text-6xl lg:text-7xl"
+                >
+                    <span class="font-black italic"
+                        >Game Administration<br />Made for Everyone</span
+                    >
+                </h1>
+                <p class="text-lg text-gray-400 max-w-3xl mx-auto">
+                    Ditch traditional systems, it's time to start using a fast,
+                    efficient, and gorgeous method of administration.
+                </p>
+                <div class="flex justify-center space-x-4 mt-8">
+                    <a href="https://discord.gg/polaris" class="btn-primary"
+                        >Join Discord</a
+                    >
+                    <a
+                        href="https://docs.polarisadmin.xyz"
+                        class="btn-secondary"
+                        >Read Documentation</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-10">
+            <div class="feature-container fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center space-x-3 text-white">
+                            <i class="fas fa-lock text-2xl text-grey-500"></i>
+                            <h3 class="text-2xl font-semibold">Security</h3>
+                        </div>
+                        <p class="text-gray-400">
+                            All of your games' information is stored securely in
+                            our cloud servers. We will never sell your data, and
+                            you can request it to be deleted.
+                        </p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center space-x-3 text-white">
+                            <i class="fas fa-plug text-2xl text-grey-500"></i>
+                            <h3 class="text-2xl font-semibold">
+                                Cross-Compatibility
+                            </h3>
+                        </div>
+                        <p class="text-gray-400">
+                            Effortlessly manage your games from our pre-built
+                            Roblox panel or Discord bot, free of charge, or use
+                            our developer module to write your own.
+                        </p>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center space-x-3 text-white">
+                            <i class="fas fa-users text-2xl text-grey-500"></i>
+                            <h3 class="text-2xl font-semibold">Game Sync</h3>
+                        </div>
+                        <p class="text-gray-400">
+                            You can sync multiple games to the same instance,
+                            free of charge. Simply re-use your credentials and
+                            manage all games instantly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            window.onload = function () {
+                const loadingOverlay = document.getElementById("loading");
+                loadingOverlay.classList.add("hidden");
+            };
+
+            function stopMusic() {
+                const audio = document.getElementById("background-music");
+                audio.pause();
+            }
+        </script>
+    </body>
+</html>
