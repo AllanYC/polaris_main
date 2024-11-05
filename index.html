@@ -39,9 +39,6 @@
                 animation: gradientShift 15s ease infinite;
                 color: #ffffff;
                 scroll-behavior: smooth;
-                position: relative;
-                overflow-x: hidden;
-                overflow-y: hidden;
                 font-family: "Montserrat", sans-serif;
             }
 
@@ -113,8 +110,8 @@
                 padding: 1.5rem 2rem;
                 backdrop-filter: blur(20px);
                 background-color: rgba(11, 11, 11, 0.2);
-                position: relative;
                 z-index: 10;
+                flex-wrap: wrap; /* Allow wrapping on small screens */
             }
 
             .header a {
@@ -129,10 +126,9 @@
                 transform: scale(1.1);
             }
 
-            .btn-primary {
+            .btn-primary,
+            .btn-secondary {
                 border: 1px solid rgba(87, 83, 78, 0.2);
-                background-color: rgba(12, 12, 12, 0.2);
-                backdrop-filter: blur(20px);
                 color: white;
                 padding: 12px 24px;
                 border-radius: 6px;
@@ -140,6 +136,11 @@
                 transition:
                     background-color 0.3s,
                     transform 0.2s;
+                display: inline-block; /* Ensure buttons are inline-block for better layout */
+            }
+
+            .btn-primary {
+                background-color: rgba(12, 12, 12, 0.2);
             }
 
             .btn-primary:hover {
@@ -148,17 +149,7 @@
             }
 
             .btn-secondary {
-                border: 1px solid rgba(87, 83, 78, 0.2);
-                color: #ffffff;
                 background-color: rgba(12, 12, 12, 0.2);
-                backdrop-filter: blur(20px);
-                padding: 12px 24px;
-                border-radius: 6px;
-                font-weight: 600;
-                transition:
-                    color 0.3s,
-                    background-color 0.3s,
-                    transform 0.2s;
             }
 
             .btn-secondary:hover {
@@ -168,9 +159,9 @@
 
             .feature-container {
                 border: 1px solid rgba(87, 83, 78, 0.2);
-                max-width: 75%;
+                max-width: 90%; /* Make it wider on smaller screens */
                 margin: 2rem auto;
-                padding: 2rem;
+                padding: 1rem; /* Reduce padding for smaller screens */
                 backdrop-filter: blur(20px);
                 background-color: rgba(11, 11, 11, 0.2);
                 border-radius: 12px;
@@ -199,13 +190,11 @@
                 position: fixed;
                 bottom: 20px;
                 left: 20px;
-
                 border: 1px solid rgba(87, 83, 78, 0.2);
                 backdrop-filter: blur(20px);
                 background-color: rgba(11, 11, 11, 0.2);
                 border-radius: 12px;
                 box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-
                 color: white;
                 padding: 10px 15px;
                 cursor: pointer;
@@ -220,6 +209,26 @@
             .logo {
                 max-height: 50px;
                 height: auto;
+            }
+
+            @media (max-width: 640px) {
+                .header {
+                    flex-direction: column; /* Stack items in the header */
+                    align-items: flex-start;
+                }
+                .header a {
+                    padding: 0.5rem 0; /* Add spacing for links */
+                }
+                .btn-primary,
+                .btn-secondary {
+                    padding: 10px 15px; /* Smaller buttons on mobile */
+                }
+                h1 {
+                    font-size: 2.5rem; /* Smaller heading size */
+                }
+                p {
+                    font-size: 1rem; /* Smaller paragraph text */
+                }
             }
         </style>
     </head>
